@@ -1,2 +1,2 @@
 #!/bin/bash
-bash -c "$(curl -sL https://get.containerlab.dev)"
+curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
