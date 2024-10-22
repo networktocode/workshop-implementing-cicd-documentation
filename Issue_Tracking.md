@@ -30,3 +30,7 @@ mgmt:
   # ipv4-subnet: "172.17.0.0/16"
 ```
 
+4. GitLab runner defaults to system runner
+
+Workaround: Use tags to register runner as well as specify in steps. 
+

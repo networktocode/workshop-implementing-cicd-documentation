@@ -95,28 +95,55 @@ This message shows that your installation appears to be working correctly.
 
 4. Register GitLab Runner: 
     - Get runner token via Project -> Settings -> CI/CD -> Project Runners
-    - Register runner via the following command ```gitlab-runner register  --url https://gitlab.com  --token <token>```. 
+    - We will use tags to specify the jobs this runner can run
+    - Register runner via the following command ```gitlab-runner register  --url https://gitlab.com  --token <token>```
+    - Start the runner with ```gitlab-runner run```
 
+![gitlabrunner_1](images/gitlabrunner_1.png)
 
+![gitlabrunner_2](images/gitlabrunner_2.png)
 
 ```
-$ gitlab-runner register  --url https://gitlab.com  --token <token>
-... <skip>
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev/clab (main) $ gitlab-runner register  --url https://gitlab.com  --token <token>
+Runtime platform                                    arch=amd64 os=linux pid=6772 revision=affd9e7d version=17.5.1
+WARNING: Running in user-mode.                     
+WARNING: The user-mode requires you to manually start builds processing: 
+WARNING: $ gitlab-runner run                       
+WARNING: Use sudo for system-mode:                 
+WARNING: $ sudo gitlab-runner...                   
+                                                   
+Enter the GitLab instance URL (for example, https://gitlab.com/):
+[https://gitlab.com]: 
+Verifying runner... is valid                        runner=t3_R8RTAU
 Enter a name for the runner. This is stored only in the local config.toml file:
-[codespaces-38d00a]: <unique name, example: echou-codespace-test1>
-Enter an executor: virtualbox, docker-windows, kubernetes, docker-autoscaler, instance, custom, parallels, docker, docker+machine, shell, ssh:
-<shell>
+[codespaces-a76e8e]: 
+Enter an executor: ssh, virtualbox, docker, docker+machine, kubernetes, instance, custom, parallels, docker-windows, docker-autoscaler, shell:
+docker
+Enter the default Docker image (for example, ruby:2.7):
+python:3.10
 Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
  
-Configuration (with the authentication token) was saved in "/home/vscode/.gitlab-runner/config.toml"
+Configuration (with the authentication token) was saved in "/home/vscode/.gitlab-runner/config.toml" 
+
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev/clab (main) $ gitlab-runner run
+Runtime platform                                    arch=amd64 os=linux pid=9790 revision=affd9e7d version=17.5.1
+Starting multi-runner from /home/vscode/.gitlab-runner/config.toml...  builds=0 max_builds=0
+WARNING: Running in user-mode.                     
+WARNING: Use sudo for system-mode:                 
+WARNING: $ sudo gitlab-runner...                   
+                                                   
+Configuration loaded                                builds=0 max_builds=1
+listen_address not defined, metrics & debug endpoints disabled  builds=0 max_builds=1
+[session_server].listen_address not defined, session endpoints disabled  builds=0 max_builds=1
+Initializing executor providers                     builds=0 max_builds=1
 ```
+
+![gitlabrunner_3](images/gitlabrunner_3.png)
+
 
 ### Video Demonstration
 
 [![video_demo](images/video_demo_screenshot.png)](https://www.youtube.com/watch?v=KJMVH2okO24)
-
-
-
 
 
 
