@@ -91,56 +91,148 @@ This message shows that your installation appears to be working correctly.
 
 3. Use command ```docker import cEOS64.<version>.tar.xz ceos:<version>``` to import the image, for example: 
 
-``docker import cEOS64-lab-4.32.0F.tar.xz ceos:4.32.0F``
+``docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F``
 
 4. Register GitLab Runner (screenshot following the steps): 
     - Get runner token via Project -> Settings -> CI/CD -> Project Runners
     - We will use tags to specify the jobs this runner can run
-    - Register runner via the following command ```sudo gitlab-runner register  --url https://gitlab.com  --token <token>```
-    - Use ```docker``` as the executor 
-    - Start the runner in system mode with ```sudo gitlab-runner run```
+    - Register runner via the following command ```gitlab-runner register  --url https://gitlab.com  --token <token>```
+    - Use ```shell``` as the executor 
+    - Start the runner with ```gitlab-runner run```
 
 ![gitlabrunner_1](images/gitlabrunner_1.png)
 
 ![gitlabrunner_2](images/gitlabrunner_2.png)
 
 ```
-$ sudo gitlab-runner register  --url https://gitlab.com  --token glrt-t3_mYdTZ_r5ubXLwDTwyqSr
-Runtime platform                                    arch=amd64 os=linux pid=18396 revision=affd9e7d version=17.5.1
-Running in system-mode.                            
+$ gitlab-runner register  --url https://gitlab.com  --token glrt-t3_Ho_FyqxT4FB6uVR_K1ix
+Runtime platform                                    arch=amd64 os=linux pid=6240 revision=affd9e7d version=17.5.1
+WARNING: Running in user-mode.                     
+WARNING: The user-mode requires you to manually start builds processing: 
+WARNING: $ gitlab-runner run                       
+WARNING: Use sudo for system-mode:                 
+WARNING: $ sudo gitlab-runner...                   
                                                    
+Created missing unique system ID                    system_id=s_32888d995e9c
 Enter the GitLab instance URL (for example, https://gitlab.com/):
 [https://gitlab.com]: 
-Verifying runner... is valid                        runner=t3_mYdTZ_
+Verifying runner... is valid                        runner=t3_Ho_Fyq
 Enter a name for the runner. This is stored only in the local config.toml file:
-[codespaces-a94d93]: 
-Enter an executor: custom, docker-autoscaler, docker-windows, docker+machine, kubernetes, shell, ssh, parallels, virtualbox, docker, instance:
-docker
-Enter the default Docker image (for example, ruby:2.7):
-python:3.10
+[codespaces-2eb003]: 
+Enter an executor: custom, parallels, virtualbox, docker, docker-windows, instance, shell, ssh, docker+machine, kubernetes, docker-autoscaler:
+shell
 Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
  
-Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" 
+Configuration (with the authentication token) was saved in "/home/vscode/.gitlab-runner/config.toml" 
 
-$ sudo gitlab-runner run
-Runtime platform                                    arch=amd64 os=linux pid=18637 revision=affd9e7d version=17.5.1
-Starting multi-runner from /etc/gitlab-runner/config.toml...  builds=0 max_builds=0
-Running in system-mode.                            
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev (main) $ gitlab-runner run
+Runtime platform                                    arch=amd64 os=linux pid=6462 revision=affd9e7d version=17.5.1
+Starting multi-runner from /home/vscode/.gitlab-runner/config.toml...  builds=0 max_builds=0
+WARNING: Running in user-mode.                     
+WARNING: Use sudo for system-mode:                 
+WARNING: $ sudo gitlab-runner...                   
                                                    
 Configuration loaded                                builds=0 max_builds=1
 listen_address not defined, metrics & debug endpoints disabled  builds=0 max_builds=1
 [session_server].listen_address not defined, session endpoints disabled  builds=0 max_builds=1
 Initializing executor providers                     builds=0 max_builds=1
+Checking for jobs... received                       job=8156204076 repo_url=https://gitlab.com/eric-chou-1/test-ci.git runner=t3_Ho_Fyq
+Added job to processing list                        builds=1 job=8156204076 max_builds=1 project=32233373 repo_url=https://gitlab.com/eric-chou-1/test-ci.git time_in_queue_seconds=0
+Appending trace to coordinator...ok                 code=202 job=8156204076 job-log=0-3705 job-status=running runner=t3_Ho_Fyq sent-log=0-3704 status=202 Accepted update-interval=3s
 ```
 
 ![gitlabrunner_3](images/gitlabrunner_3.png)
 
 
-### Video Demonstration
+## Lab Setup Walkthru Video
 
 [![video_demo](images/video_demo_screenshot.png)](https://www.youtube.com/watch?v=KJMVH2okO24)
 
+## (Optional) Checking for end-to-end Lab Setup
 
+This is complete optional and we will go over it in the workshop as our first lab, but if you are up for some testing, we can test the end-to-end lab setup with the following steps. 
 
+- Start containerlab
 
+```
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev/clab (main) $ sudo containerlab deploy --topo ceos-lab.clab.yml 
+INFO[0000] Containerlab v0.58.0 started                 
+INFO[0000] Parsing & checking topology file: ceos-lab.clab.yml 
+WARN[0000] Unable to init module loader: stat /lib/modules/6.5.0-1025-azure/modules.dep: no such file or directory. Skipping... 
+INFO[0000] Creating lab directory: /workspaces/autocon2-cicd-workshop-dev/clab/clab-ceos-lab 
+INFO[0000] Creating container: "ceos-02"                
+INFO[0000] Creating container: "ceos-01"                
+INFO[0000] Running postdeploy actions for Arista cEOS 'ceos-01' node 
+INFO[0000] Created link: ceos-01:eth1 <--> ceos-02:eth1 
+INFO[0000] Running postdeploy actions for Arista cEOS 'ceos-02' node 
+INFO[0042] Adding containerlab host entries to /etc/hosts file 
+INFO[0042] Adding ssh config for containerlab nodes     
++---+---------+--------------+--------------+------+---------+---------------+--------------+
+| # |  Name   | Container ID |    Image     | Kind |  State  | IPv4 Address  | IPv6 Address |
++---+---------+--------------+--------------+------+---------+---------------+--------------+
+| 1 | ceos-01 | 98ff98926159 | ceos:4.32.0F | ceos | running | 172.17.0.3/16 | N/A          |
+| 2 | ceos-02 | 73b94e874b6c | ceos:4.32.0F | ceos | running | 172.17.0.2/16 | N/A          |
++---+---------+--------------+--------------+------+---------+---------------+--------------+
+```
+ - Create a test project with the following CI file .gitlab-ci.yml
+
+ ```
+stages: 
+  - deploy
+
+deploy testing:
+  image: "python:3.10"
+  stage: deploy
+  tags: 
+    - "ericchou-1"
+  script: 
+    - pip3 install nornir_utils nornir_netmiko
+    - python3 show_version.py
+ ```
+
+- Create the following hosts.yaml file
+
+```
+---
+eos-1:
+    hostname: '172.17.0.2'
+    port: 22
+    username: 'admin'
+    password: 'admin'
+    platform: 'arista_eos'
+
+eos-2:
+    hostname: '172.17.0.3'
+    port: 22
+    username: 'admin'
+    password: 'admin'
+    platform: 'arista_eos'
+```
+
+- Create the following show_version.py file
+
+```
+#!/usr/bin/env python
+from nornir import InitNornir
+from nornir_netmiko import netmiko_send_command
+from nornir_utils.plugins.functions import print_result
+
+# Initialize Nornir, by default it will look for the 
+# hosts.yaml file in the same directory. 
+nr = InitNornir()
+
+# Run the show version command for each of the devices. 
+# store the value in the results variable. 
+result = nr.run(
+    task=netmiko_send_command,
+    command_string="show version"
+)
+
+# print the results in 
+print_result(result)
+```
+
+- You should see the following result: 
+
+![optional_first_pipeline](images/optional_fisrt_pipeline.png)
 

@@ -34,3 +34,26 @@ mgmt:
 
 Workaround: Use tags to register runner as well as specify in steps. 
 
+```
+stages: 
+  - deploy
+
+deploy testing:
+  image: "python:3.10"
+  stage: deploy
+  tags: 
+    - "ericchou-1"
+  script: 
+    - pip3 install nornir_utils nornir_netmiko
+    - python3 show_version.py
+```
+
+5. GitLab runner executor with shell instead of docker. 
+
+Status: investigating, but seems to be limitation with Codespace + GitLab wall with docker status hang and system errors. 
+
+```
+
+ERROR: Checking for jobs... forbidden               runner=t3_zpzzQo status=POST https://gitlab.com/api/v4/jobs/request: 403 Forbidden
+ERROR: Checking for jobs... forbidden               runner=t3_zpzzQo status=POST https://gitlab.com/api/v4/jobs/request: 403 Forbidden
+```
