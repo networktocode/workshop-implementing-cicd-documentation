@@ -18,21 +18,30 @@ But first things first, we would like to walk you through how to set up the deve
 
 ## Lab Components
 
-Here is an overview of the lab: 
+Here is an overview of lab:   
 
 ![Lab_Diagram_v1](images/Lab_Diagram_v1.drawio.png)
 
-Here are the components: 
+Here are the details regarding each components: 
 
-- [GitHub Codespace](https://github.com/features/codespaces): We will use GitHub codepsace as our IDE as well as the place to run our network lab. They offer a generous free tier that should remain to be free for the furation of this lab. 
-- [Containerlab](https://containerlab.dev/): We will use containerlab for our lab devices running inside of codepsace. 
-- [GitLab for Personal Projects](https://about.gitlab.com/pricing/): We will use the SaaS version of GitLab as we build our CI/CD pipeline. 
-- [Arista cEOS](https://containerlab.dev/manual/kinds/ceos/): We will use Arista cEOS for our lab. 
+- [GitLab](https://about.gitlab.com/pricing/): We will use the SaaS version of GitLab as the CI server. The CI server handles the committing, building, testing, staging, and releasing the changes. 
+- [GitLab Runners](https://docs.gitlab.com/runner/): GitLab runners are workers that registers itself with the GitLab server and managed by the GitLab server. They are responsible to carry out the instructions by the GitLab server. 
+- [GitHub Codespace](https://github.com/features/codespaces): We will use GitHub codepsace as our IDE as well as the virtual server to run our network lab. GitHub provides these container-based development environment for developers. We will use Containerlab to run a few network devices for our lab. GitHub offer a generous free tier in Codespace that should remain to be free for the furation of this lab. 
+- [Containerlab](https://containerlab.dev/): We will use containerlab for our lab devices running inside of codepsace.  
+- [Arista cEOS](https://containerlab.dev/manual/kinds/ceos/): We will use Arista cEOS for our lab for their light overhead and relative high adaption in production networks. 
 
-Please do the following: 
+## GitLab Account Registration and cEOS Download
+
+Please do the following steps to set up the lab: 
 
 1. Register for a free GitLab.com account [here](https://gitlab.com/-/trial_registrations/new?_gl=1%2A1c025i%2A_ga%2AMTYyOTY3MzIyLjE2ODcyNzM0MTI.%2A_ga_ENFH3X7M5Y%2AMTY4NzI3MzQxMS4xLjAuMTY4NzI3MzQxNC4wLjAuMA). 
-2. Download the free Arista cEOS image [here](https://www.arista.com/en/login). We will import it into Codespace later. Please download images later than 4.28. We will use 4.30.4M for our lab. 
+2. Download the free Arista cEOS image [here](https://www.arista.com/en/login). The image is free but you do need to register an Arista account with your business email. We will import the Arista image Codespace later. 
+
+![arista_download_1](images/arista_download_1.png)
+
+Please download images later than 4.28. We will use 4.30.4M for our lab. 
+
+![arista_downaload_2](images/arista_download_2.png)
 
 > [!TIP]
 You just need to download the image for now, for reference here is the import instruction from [containerlab](https://www.youtube.com/watch?v=KJMVH2okO24) and a nice walk through video from [Roman](https://www.youtube.com/watch?v=KJMVH2okO24). 
@@ -41,9 +50,29 @@ You just need to download the image for now, for reference here is the import in
 
 Alright, now it is time to tie everything together. 
 
-1. Start Codespace by going to Code -> 'Create codespace on main': 
+1. In this repository, we can start Codespace by going to Code button on the top left corner and choose 'Create codespace on main': 
 
 ![codespace_start](images/codespace_start.png)
+
+> [!TIP] 
+> It will take a bit of time to build codespace for the first time, you can click on [building codespace](images/building_codespace.png) to check on the progress. After it started for the first time, when you stop/start the instance it will be much faster. 
+
+Once Codespace is started, we can verify both Docker and containerlab are installed and running: 
+
+```
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev (main) $ poetry --version
+Poetry (version 1.8.4)
+
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev (main) $ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+...<skip>
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+<skip>
+
+
+```
 
 2. After codespace is started, right click in the Explorer section and choose upload: 
 
