@@ -71,7 +71,18 @@ Hello from Docker!
 This message shows that your installation appears to be working correctly.
 <skip>
 
+@ericchou1 ➜ /workspaces/autocon2-cicd-workshop-dev (main) $ containerlab version
+  ____ ___  _   _ _____  _    ___ _   _ _____ ____  _       _     
+ / ___/ _ \| \ | |_   _|/ \  |_ _| \ | | ____|  _ \| | __ _| |__  
+| |  | | | |  \| | | | / _ \  | ||  \| |  _| | |_) | |/ _` | '_ \ 
+| |__| |_| | |\  | | |/ ___ \ | || |\  | |___|  _ <| | (_| | |_) |
+ \____\___/|_| \_| |_/_/   \_\___|_| \_|_____|_| \_\_|\__,_|_.__/ 
 
+    version: 0.58.0
+     commit: 2c249b2c
+       date: 2024-10-15T11:38:50Z
+     source: https://github.com/srl-labs/containerlab
+ rel. notes: https://containerlab.dev/rn/0.58/
 ```
 
 2. After codespace is started, right click in the Explorer section and choose upload: 
@@ -84,7 +95,9 @@ This message shows that your installation appears to be working correctly.
 
 4. Register GitLab Runner: 
     - Get runner token via Project -> Settings -> CI/CD -> Project Runners
-    - Register runner via the following command: 
+    - Register runner via the following command ```gitlab-runner register  --url https://gitlab.com  --token <token>```. 
+
+
 
 ```
 $ gitlab-runner register  --url https://gitlab.com  --token <token>
