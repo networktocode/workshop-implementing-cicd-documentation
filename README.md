@@ -109,8 +109,10 @@ Pick a name for the project:
 
 
 5. Register GitLab Runner (screenshot following the steps): 
-    - Get runner token via Project -> Settings -> CI/CD -> Project Runners
-    - We will use tags to specify the jobs this runner can run
+    - Under the GitLab project you created, get runner token via Project -> Settings -> CI/CD -> Project Runners. 
+    - When creating this runner, we will use tags to specify the jobs this runner can pickup. 
+    - Copy the command on the screen to register the runner. 
+    - Come back to the Codespace instance. 
     - Register runner via the following command ```gitlab-runner register  --url https://gitlab.com  --token <token>```
     - Use ```shell``` as the executor 
     - Start the runner with ```gitlab-runner run```
@@ -120,7 +122,7 @@ Pick a name for the project:
 ![gitlabrunner_2](images/gitlabrunner_2.png)
 
 ```
-$ gitlab-runner register  --url https://gitlab.com  --token glrt-t3_Ho_FyqxT4FB6uVR_K1ix
+$ gitlab-runner register  --url https://gitlab.com  --token <token>
 Runtime platform                                    arch=amd64 os=linux pid=6240 revision=affd9e7d version=17.5.1
 WARNING: Running in user-mode.                     
 WARNING: The user-mode requires you to manually start builds processing: 
