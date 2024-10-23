@@ -34,7 +34,10 @@ Here are the details regarding each components:
 
 Please do the following steps to set up the lab: 
 
-1. Register for a free GitLab.com account [here](https://gitlab.com/-/trial_registrations/new?_gl=1%2A1c025i%2A_ga%2AMTYyOTY3MzIyLjE2ODcyNzM0MTI.%2A_ga_ENFH3X7M5Y%2AMTY4NzI3MzQxMS4xLjAuMTY4NzI3MzQxNC4wLjAuMA). 
+1. Register for a free GitLab.com account [here](https://gitlab.com/users/sign_up) if you do not have one. For a new registration, a project name is required, you can use a temp name or 'Autocon_Lab1' as that is one of the project we will create later: 
+
+![gitlab_account_signup](images/gitlab_account_signup.png)
+
 2. Download the free Arista cEOS image [here](https://www.arista.com/en/login). The image is free but you do need to register an Arista account with your business email. We will import the Arista image Codespace later. 
 
 ![arista_download_1](images/arista_download_1.png)
