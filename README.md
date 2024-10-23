@@ -161,23 +161,23 @@ Appending trace to coordinator...ok                 code=202 job=8156204076 job-
 ![gitlabrunner_3](images/gitlabrunner_3.png)
 
 
-## Lab Setup Walkthru Video
+## Lab Setup Walkthrough Video
 
-- Launch Codespace 
+Here are video walkthrough to help with illustrate the lab setup. 
 
-Step 1. Overview and Software Download
+Video 1. Overview and Software Download
 
 [![video_step_1](images/video_step_1.png)](https://www.youtube.com/watch?v=p7FcvGOZHuY)
 
-Step 2. Codespace Launch and Preparation
+Video 2. Codespace Launch and Preparation
 
 [![video_step_2](images/video_step_2.png)](https://www.youtube.com/watch?v=FbbZD1IWgFA)
 
-Step 3. Create Gitlab Project
+Video 3. Create Gitlab Project
 
 [![video_step_3](images/video_step_3.png)](https://www.youtube.com/watch?v=Rqtnxg9mPmM)
 
-Step 4. Runner Registration
+Video 4. Runner Registration
 
 [![video_step_4](images/video_step_4.png)](https://www.youtube.com/watch?v=oHII3icJgB8)
 
