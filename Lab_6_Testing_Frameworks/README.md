@@ -13,7 +13,7 @@ The first step in this lab is to checkout the Lab 6 branch from our forked repos
 1. Ensure you're in the correct GitLab forked repository directory. (./ac2_cicd_workshop)
 
 ```sh
-cd ac2-cicd-workshop/ac2_cicd_workshop/
+cd workshop-implementing-cicd-pipelines/cicd_workshop/
 ```
 
 2. Switch into the Lab 5 Branch
@@ -27,7 +27,7 @@ git switch Lab_6_Testing_Frameworks
 In Lab 4 we started our Containerlab topology. Quickly make sure that is still up and the Mgmt IPs havent changed.
 
 ```
-@jeffkala ➜ /workspaces/autocon2-cicd-workshop-dev/clab (jkala-work) $ sudo containerlab inspect
+@jeffkala ➜ /workspaces/autocon2-cicd-workshop-dev/clab (main) $ sudo containerlab inspect
 INFO[0000] Parsing & checking topology file: ceos-lab.clab.yml 
 +---+---------+--------------+--------------+------+---------+---------------+--------------+
 | # |  Name   | Container ID |    Image     | Kind |  State  | IPv4 Address  | IPv6 Address |
@@ -97,7 +97,7 @@ batfish-check-config-job:
       alias: "batfish"
   script:
     - "echo 'Batfish validate generated configs..'"
-    - "poetry run python ac2_cicd_workshop/cli.py batfish-test-config"
+    - "uv run python cicd_workshop/cli.py batfish-test-config"
 ```
 
 Assuming the Batfish checks succeed. We move onto deploying the configuration to the devices.
@@ -114,7 +114,7 @@ config-deploy-job:
   stage: "lab-6-deploy"
   script:
     - "echo 'Deploy the generated configs..'"
-    - "poetry run python ac2_cicd_workshop/cli.py deploy-config"
+    - "uv run python cicd_workshop/cli.py deploy-config"
     # when: "manual"
 ```
 
@@ -122,12 +122,12 @@ config-deploy-job:
 
 Finally, we will use Pytest and specifically the NUTS plugin extension to validate our OSPF changes accomplished the goal we expected.
 
-Since NUTS is a pytest plugin, we don't need to build the underlying code to execute the test. We simply add test into our `tests` directory.
+Since NUTS is a Pytest plugin, we don't need to build the underlying code to execute the test. We simply add test into our `tests` directory.
 
-First, we create a `nuts` folder inside the `tests` directory. This allows us to seperate our pytest related test executions.
+First, we create a `nuts` folder inside the `tests` directory. This allows us to separate our Pytest related test executions.
 
 > [!INFO] 
-> When we run our source code checks via pytest we don't want to run the NUTS test also.
+> When we run our source code checks via Pytest we don't want to run the NUTS test also.
 
 Second, we use one of the native NUTS tests to make sure our new expected OSPF routing is working.
 
@@ -192,4 +192,4 @@ To close out the workshop, simply remember that this is just the start. You coul
 
 We hope you enjoyed the workshop!
 
-- Eric, Jeff, and Tim
+- Network to Code Team

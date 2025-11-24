@@ -23,7 +23,7 @@ git switch Lab_5_Generate_Configs
 In Lab 4 we started our Containerlab topology. Quickly make sure that is still up and the Mgmt IPs haven't changed.
 
 ```
-@jeffkala ➜ /workspaces/workshop-implementing-cicd/clab (jkala-work) $ sudo containerlab inspect
+@jeffkala ➜ /workspaces/autocon2-cicd-workshop-dev/clab (main) $ sudo containerlab inspect
 INFO[0000] Parsing & checking topology file: ceos-lab.clab.yml 
 +---+---------+--------------+--------------+------+---------+---------------+--------------+
 | # |  Name   | Container ID |    Image     | Kind |  State  | IPv4 Address  | IPv6 Address |
