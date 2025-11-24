@@ -12,13 +12,13 @@ Many of the features discussed here will be more useful when there are more team
 
 ## Labels 
 
-Labels are typically used to categoize and organize issues, requests, and anything that you want to filter on. 
+Labels are typically used to categorized and organize issues, requests, and anything that you want to filter on. 
 
 https://docs.gitlab.com/ee/user/project/labels.html 
 
 We can use labels for the following: 
 
-- Prioriteis: P1 Critical, P2 High, P3 Medium, P4 Low, etc. 
+- Priorities: P1 Critical, P2 High, P3 Medium, P4 Low, etc. 
 - Status: In progress, To Do, Review, Blocked, etc. 
 - Type: Bugs, Features, Documentation, etc. 
 
@@ -46,13 +46,20 @@ Let's go ahead and create an issue, assign to yourself, and assign some labels t
 
 ## Milestones
 
-Milestones can be used to track releases or other siginificant steps to unified the team's effort: 
+Milestones can be used to track releases or other significant steps to unified the team's effort: 
 
 https://docs.gitlab.com/ee/user/project/milestones/ 
 
 Milestones can be created under Plan -> Milestones: 
 
 ![milestones](images/milestones.png)
+
+Populate the milestone with the following data:
+
+Title: `Release of V1 Source of Truth Software`
+Start Date: `2025-10-01`
+Due Date: `2025-12-31`
+Description: `Release of V1 Source of Truth Software`
 
 As indicated in the example, we can specify a start date, due date, and other attributes. Once created, we can also specify related issues, track times, and count merge requests toward this milestone. 
 
