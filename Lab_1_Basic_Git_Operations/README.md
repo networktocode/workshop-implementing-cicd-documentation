@@ -11,7 +11,7 @@ GitLab is a platform that builds on top of Git to provide more tools for develop
 Why do we use GitLab instead of GitHub, especially when we are already utilize GitHub Codespace for our development platform? IMHO, when it comes to DevOps, GitLab offers some advantages over GitHub: 
 
 - GitLab has a built-in CI/CD environment while GitHub's GitHub Actions requires more setup and needs more third-party integration to be feature-parity with GitLab. 
-- GitLab runners were relased around 2011 while GitHub Action was released in 2018. GitLab Runner has been around longer and is arguably more mature than GitHub Action. 
+- GitLab runners were released around 2011 while GitHub Action was released in 2018. GitLab Runner has been around longer and is arguably more mature than GitHub Action. 
 - GitHub has traditionally been focused on code hosting and collaboration while GitLab has been an all-in-one DevOps platform from the beginning with project management, issue tracking, and more. 
 - GitLab offers free self-hosting option while GitHub only offers self-hosting with paid tiers.  
 
@@ -19,9 +19,14 @@ Having said that, GitHub offer advantages such as larger community, better integ
 
 ## Basic Setup
 
-To begin with, make sure you have Codespace launched and ready to go following the instructions on the main [README](../README.md).
+To begin with, make sure you have GitHub Codespace launched and ready to go following the instructions on the main [README](../README.md).
 
 We should have already created a project in order to create a new runner. However, if you have not done so already, or created a project under a different name, we can create a new project from the ```+``` sign and pick 'New project/repository':
+
+> [!New UI]
+>  While updating this workshop in late 2025 GitLab is doing a canary deployment for their `New UI`, feel free to toggle it off during the setup.
+
+![toggle_new_ui](images/toggle_new_ui.png)
 
 ![create_gitlab_project](images/create_gitlab_project.png)
 
@@ -29,9 +34,9 @@ Choose the option to create a blank project:
 
 ![create_blank_project](images/create_blank_project.png)
 
-Feel free to use any name you'd like, but we will use 'Autocon_Lab1' for the example: 
+Feel free to use any name you'd like, but we will use 'CICD Workshop Lab1' for the example: 
 
-![gitlab_autocon_lab1](images/gitlab_autocon_lab1.png)
+![gitlab_cicd_lab1](images/gitlab_cicd_lab1.png)
 
 Now, let's take a look at making copies of the repository. 
 
@@ -76,7 +81,7 @@ $ cat ~/.ssh/id_rsa.pub
 <public key text>
 ```
 
-Let's add the public key to the repositry by going to Settings -> Repository -> Deploy Keys, make sure we check the box for ```Grant write permission to this key```: 
+Let's add the public key to the repository by going to Settings -> Repository -> Deploy Keys, make sure we check the box for ```Grant write permission to this key```: 
 
 ![add_key](images/add_key.png)
 
@@ -90,8 +95,8 @@ We will clone this repository with ssh, go to the repository page and click on c
 We can now clone the repository locally in Codespace: 
 
 ```
-$ git clone git@gitlab.com:eric-chou-1/autocon_lab1.git
-Cloning into 'autocon_lab1'...
+$ git clone git@gitlab.com:jeffkala/cicd-workshop-lab1.git
+Cloning into 'cicd-workshop-lab1'...
 The authenticity of host 'gitlab.com (172.65.251.78)' can't be established.
 ED25519 key fingerprint is SHA256:eUXGGm1YGsMAS7vkcx6JOJdOGHPem5gQp4taiCfCLB8.
 This key is not known by any other names
@@ -111,7 +116,7 @@ Once we have the local copy, we will use it as the primary workspace for our ope
 We will change into the directory and take a look, currently there is only one README.md file: 
 
 ```
-$ cd autocon_lab1/
+$ cd cicd-workshop-lab1/
 $ ls
 README.md
 ```
@@ -155,8 +160,8 @@ $ git commit -m "add new my_file.txt file"
  create mode 100644 my_file.txt
 
 $ git remote -v
-origin  git@gitlab.com:eric-chou-1/autocon_lab1.git (fetch)
-origin  git@gitlab.com:eric-chou-1/autocon_lab1.git (push) 
+origin  git@gitlab.com:jeffkala/cicd-workshop-lab1.git (fetch)
+origin  git@gitlab.com:jeffkala/cicd-workshop-lab1.git (push) 
 
 $ git push origin main
 Enumerating objects: 4, done.
@@ -165,7 +170,7 @@ Delta compression using up to 2 threads
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 304 bytes | 304.00 KiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-To gitlab.com:eric-chou-1/autocon_lab1.git
+To gitlab.com:jeffkala/cicd-workshop-lab1.git
    66df95f..2d40e95  main -> main
 ```
 
@@ -173,7 +178,7 @@ We should now be able to see the file appeared on the GitLab repository:
 
 ![file_added](images/file_added.png)
 
-You may have noticed the ```git push origin main``` command, the ```origin``` indicates the remote repository name, the ```main``` key word indcates the "branch" we are pushing toward. Branching is what we will discuss next.  
+You may have noticed the ```git push origin main``` command, the ```origin``` indicates the remote repository name, the ```main``` key word indicates the "branch" we are pushing toward. Branching is what we will discuss next.  
 
 ## Branches
 
@@ -216,9 +221,9 @@ Writing objects: 100% (3/3), 324 bytes | 324.00 KiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 remote: 
 remote: To create a merge request for dev, visit:
-remote:   https://gitlab.com/eric-chou-1/autocon_lab1/-/merge_requests/new?merge_request%5Bsource_branch%5D=dev
+remote:   https://gitlab.com/jeffkala/cicd-workshop-lab1/-/merge_requests/new?merge_request%5Bsource_branch%5D=dev
 remote: 
-To gitlab.com:eric-chou-1/autocon_lab1.git
+To gitlab.com:jeffkala/cicd-workshop-lab1.git
  * [new branch]      dev -> dev
 ```
 
@@ -242,7 +247,7 @@ If we click on it, we can fill out the fields for a new merge request:
 
 ![merge_request_2](images/merge_request_2.png)
 
-We can uncheck the box for deleteing the branch when merged if we want to keep the branch after merge: 
+We can uncheck the box for deleting the branch when merged if we want to keep the branch after merge: 
 
 ![merge_request_3](images/merge_request_3.png)
 
@@ -289,7 +294,7 @@ It is a good idea to make it a habit to do a ```git pull``` regularly, perhaps f
 As you can see, Git is a robust code development tool. We are barely cover the basic operations, it is impossible to cover all the features. Here are some of the resources for further studying of Git: 
 
 - [Use Git](https://docs.gitlab.com/ee/topics/git/commands.html)
-- Kirk Byer's [Git for Network Engineeer's Course](https://pynet.twb-tech.com/class-gne.html) class. 
+- Kirk Byer's [Git for Network Engineers Course](https://pynet.twb-tech.com/class-gne.html) class. 
 - Book: [Version Control with Git](https://www.amazon.com/Version-Control-Git-collaborative-development/dp/1449316387/)
 
-In the next lab, we will start to buidl our first CI/CD Pipeline, see you there! 
+In the next lab, we will start to build our first CI/CD Pipeline, see you there! 
