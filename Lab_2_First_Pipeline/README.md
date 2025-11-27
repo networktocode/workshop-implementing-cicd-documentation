@@ -88,25 +88,29 @@ total 16
 1835106 -rw-rw-rw-   1 vscode root  877 Nov  5 16:28 ceos-lab.clab.yml
 1835107 drwxrwxrwx+  2 vscode root 4096 Nov  5 16:28 startup-configs
 
-$ sudo containerlab deploy --node-filter ceos-01,ceos-02 --topo ceos-lab.clab.yml 
-INFO[0000] Containerlab v0.59.0 started                 
-INFO[0000] Parsing & checking topology file: ceos-lab.clab.yml 
-WARN[0000] Unable to init module loader: stat /lib/modules/6.5.0-1025-azure/modules.dep: no such file or directory. Skipping... 
-INFO[0000] Creating lab directory: /workspaces/workshop-implementing-cicd/clab/clab-ceos-lab 
-INFO[0000] Creating container: "ceos-02"                
-INFO[0000] Creating container: "ceos-01"                
-INFO[0000] Running postdeploy actions for Arista cEOS 'ceos-01' node 
-INFO[0000] Running postdeploy actions for Arista cEOS 'ceos-02' node 
-<skip>
-...
-INFO[0095] Adding containerlab host entries to /etc/hosts file 
-INFO[0095] Adding ssh config for containerlab nodes     
-+---+---------+--------------+--------------+------+---------+---------------+--------------+
-| # |  Name   | Container ID |    Image     | Kind |  State  | IPv4 Address  | IPv6 Address |
-+---+---------+--------------+--------------+------+---------+---------------+--------------+
-| 1 | ceos-01 | 4ff16102a5a6 | ceos:4.32.0F | ceos | running | 172.17.0.3/16 | N/A          |
-| 2 | ceos-02 | da1b8b20fac1 | ceos:4.32.0F | ceos | running | 172.17.0.4/16 | N/A          |
-+---+---------+--------------+--------------+------+---------+---------------+--------------+
+@jeffkala ➜ /workspaces/workshop-implementing-cicd-documentation/clab (main) $ sudo containerlab deploy --node-filter ceos-01,ceos-02 --topo ceos-lab.clab.yml 
+03:41:42 INFO Containerlab started version=0.71.1
+03:41:42 INFO Applying node filter: ["ceos-01" "ceos-02"]
+03:41:42 INFO Parsing & checking topology file=ceos-lab.clab.yml
+03:41:42 INFO Creating docker network name=network-lab IPv4 subnet=172.24.78.0/24 IPv6 subnet="" MTU=0
+03:41:42 INFO Creating lab directory path=/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab
+03:41:42 INFO Creating container name=ceos-02
+03:41:42 INFO Creating container name=ceos-01
+03:41:42 INFO Running postdeploy actions for Arista cEOS 'ceos-01' node
+03:41:43 INFO Created link: ceos-01:eth1 ▪┄┄▪ ceos-02:eth1
+03:41:43 INFO Running postdeploy actions for Arista cEOS 'ceos-02' node
+03:42:25 INFO Adding host entries path=/etc/hosts
+03:42:25 INFO Adding SSH config for nodes path=/etc/ssh/ssh_config.d/clab-ceos-lab.conf
+You are on the latest version (0.71.1)
+╭─────────┬──────────────┬─────────┬────────────────╮
+│   Name  │  Kind/Image  │  State  │ IPv4/6 Address │
+├─────────┼──────────────┼─────────┼────────────────┤
+│ ceos-01 │ arista_ceos  │ running │ 172.24.78.10   │
+│         │ ceos:4.32.0F │         │ N/A            │
+├─────────┼──────────────┼─────────┼────────────────┤
+│ ceos-02 │ arista_ceos  │ running │ 172.24.78.11   │
+│         │ ceos:4.32.0F │         │ N/A            │
+╰─────────┴──────────────┴─────────┴────────────────╯
 ```
 
 > [!NOTE] To save some resources, I am only building the lab with 2 nodes, your output might look different with additional nodes. 
@@ -114,18 +118,18 @@ INFO[0095] Adding ssh config for containerlab nodes
 We can do some reachability testing to make sure the nodes are up and running: 
 
 ```
-$ ssh admin@172.17.0.4
-The authenticity of host '172.17.0.4 (172.17.0.4)' can't be established.
+$ ssh admin@172.24.78.11
+The authenticity of host '172.24.78.11 (172.24.78.11)' can't be established.
 ED25519 key fingerprint is SHA256:ZVSIaFxsFSTD3vGFDY1sglAXMIOLs3ynb4PXu0oPB6A.
 This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '172.17.0.4' (ED25519) to the list of known hosts.
-(admin@172.17.0.4) Password: 
+Warning: Permanently added '172.24.78.11' (ED25519) to the list of known hosts.
+(admin@172.24.78.11) Password: 
 ceos-02>exit
-Connection to 172.17.0.4 closed.
+Connection to 172.24.78.11 closed.
 
-$ ssh admin@172.17.0.3
-(admin@172.17.0.3) Password: 
+$ ssh admin@172.24.78.10
+(admin@172.24.78.10) Password: 
 Last login: Tue Nov  5 17:27:46 2024 from 172.17.0.1
 ceos-01>exit
 ```
@@ -139,27 +143,27 @@ In this step, we are mainly focused on creating a Python script that can communi
 We will open up another terminal window and create a venv and install the dependencies: 
 
 ```
-$ python3 -venv ~/.venvs/netmiko-venv
+$ python3 -m venv ~/.venvs/netmiko-venv
 
 $ source ~/.venvs/netmiko-venv/bin/activate
 
 $ pip install nornir_utils nornir_netmiko
 ```
 
-We will create the hosts.yaml file required for Nornir-Netmiko, please note the IP will need to match the IP assigned to the containerlab from the last step: 
+In the `cicd-workshop-lab1` repository we will create the `hosts.yaml` file required for Nornir-Netmiko, please note the IP will need to match the IP assigned to the containerlab from the last step: 
 
 ```
 $ cat hosts.yaml 
 ---
 eos-1:
-    hostname: '172.17.0.3'
+    hostname: '172.24.78.10'
     port: 22
     username: 'admin'
     password: 'admin'
     platform: 'arista_eos'
 
 eos-2:
-    hostname: '172.17.0.4'
+    hostname: '172.24.78.11'
     port: 22
     username: 'admin'
     password: 'admin'
@@ -189,7 +193,7 @@ print_result(result)
 Let's run this script to make sure it works: 
 
 ```
-$(netmiko-venv) python show_version.py 
+(netmiko-venv) @jeffkala ➜ /workspaces/workshop-implementing-cicd-documentation/cicd-workshop-lab1 (main) $  python show_version.py 
 netmiko_send_command************************************************************
 * eos-1 ** changed : False *****************************************************
 vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
@@ -276,6 +280,7 @@ Fast-forward
  We will swap out the ```echo "hello world"``` in the ```.gitlab-ci.yml``` file as well as change the base image to ```python:3.10```:  
 
  ```yaml
+---
  stages: 
   - deploy
 
@@ -285,13 +290,14 @@ deploy testing:
   tags: 
     - "ericchou-1"  # Update with your project runner tag!!
   script: 
-    - python3 show_version.py
+    - python show_version.py
  ```
 
 We will need to commit the files and push to the remote repository: 
 
 ```
-$ git add .gitlab-ci.yml hosts.yaml show_version.py
+$ cd ..
+$ git add .gitlab-ci.yml cicd_lab1/hosts.yaml cicd_lab1/show_version.py
 
 $ git commit -m "modified .gitlab-ci.yml, added hosts.yaml and show_version.py"
 [main 2252bbd] modified .gitlab-ci.yml, added hosts.yaml and show_version.py

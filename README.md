@@ -125,6 +125,10 @@ gitlab/gitlab-runner:latest
 
 ![gitlabrunner_2](images/gitlabrunner_2.png)
 
+Once you populate your `Tags` and go to the next page you will get your registration token.
+
+![gitlabrunner_3](images/gitlabrunner_3.png)
+
 ```sh
 $ docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
 Runtime platform arch=amd64 os=linux pid=7 revision=c6eae8d7 version=17.5.2
@@ -152,4 +156,4 @@ Runner registered successfully. Feel free to start it, but if it's running alrea
 Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml"
 ```
 
-![gitlabrunner_3](images/gitlabrunner_3.png)
+![gitlabrunner_4](images/gitlabrunner_4.png)
