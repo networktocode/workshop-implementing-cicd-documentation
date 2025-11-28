@@ -17,9 +17,6 @@ Click on the `Fork` button which is in the top right of the page.
 
 Now clone the GitLab repo in to your codespace environment. This will allow everything to be managed from this single place. 
 
-> [!NOTE]
-> The SSH Key you created in Lab 1 will work here too!
-
 ```sh
 @jeffkala ➜ /workspaces/workshop-implementing-cicd (main) $ git clone git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git
 Cloning into 'workshop-implementing-cicd-pipelines'...
@@ -35,11 +32,30 @@ Once the forked repository is cloned into codespace you will see it in your file
 
 ![codespace-with-fork](./images/codespace-with-fork.png)
 
-From within the `cicd_workshop` directory.
+From within the `workshop-implementing-cicd-pipelines` directory validate your remote is properly set.
 
 ```sh
-$ git remote set-url origin git@gitlab.com:<GitLab Username>/workshop-implementing-cicd-pipelines.git
+@jeffkala ➜ /workspaces/workshop-implementing-cicd-documentation/workshop-implementing-cicd-pipelines (main) $ git remote -v
+origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (fetch)
+origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (push)
 ```
+
+
+Finally, lets allow our same `SSH Key` we generated previously in `Lab 1. Basic Git Operations`. In GitLab you do the follow:
+
+1. Go to the `workshop-implementing-cicd-pipelines` repository and navigate to Settings -> Repository -> Deploy Keys.
+2. You will notice that `Enabled Deploy Keys` tab is empty currently.  Click on `Privately accessible deploy keys` and you will see the SSH Key we setup previously. Click `Enabled`.
+
+![deploy_keys_1](./images/deploy_keys_1.png)
+
+3. Navigate back to `Enabled Deploy Keys` and you will see the SSH key shows up now!! 
+
+![deploy_keys_2](./images/deploy_keys_2.png)
+
+4. Finally, we edit the key and make sure we check the box for ```Grant write permission to this key```
+
+![deploy_keys_3](./images/deploy_keys_3.png)
+
 
 ## Run Containerlab Topology and Update the Nornir Inventory
 
@@ -49,25 +65,27 @@ Due to the nature of GitHub's codespaces; and the docker networking within; ther
 
 Navigate to clab directory:
 ```
-@jeffkala ➜ /workspaces/workshop-implementing-cicd  (main) $ cd clab/
+@jeffkala ➜ /workspaces/workshop-implementing-cicd  (main) $ cd ../clab/
 ```
 
 Start the topology:
 ```
 @jeffkala ➜ /workspaces/workshop-implementing-cicd /clab (main) $ sudo containerlab deploy --topo ceos-lab.clab.yml 
-INFO[0000] Containerlab v0.59.0 started                 
-INFO[0000] Parsing & checking topology file: ceos-lab.clab.yml 
-< omitted >
-INFO[0083] Adding containerlab host entries to /etc/hosts file 
-INFO[0083] Adding ssh config for containerlab nodes     
-+---+---------+--------------+--------------+------+---------+---------------+--------------+
-| # |  Name   | Container ID |    Image     | Kind |  State  | IPv4 Address  | IPv6 Address |
-+---+---------+--------------+--------------+------+---------+---------------+--------------+
-| 1 | ceos-01 | 83980f93c345 | ceos:4.32.0F | ceos | running | 172.17.0.6/16 | N/A          |
-| 2 | ceos-02 | d001c87a784e | ceos:4.32.0F | ceos | running | 172.17.0.4/16 | N/A          |
-| 3 | ceos-03 | 603aacedc2e0 | ceos:4.32.0F | ceos | running | 172.17.0.5/16 | N/A          |
-| 4 | ceos-04 | 7ac8e8f17ecd | ceos:4.32.0F | ceos | running | 172.17.0.3/16 | N/A          |
-+---+---------+--------------+--------------+------+---------+---------------+--------------+
+╭─────────┬──────────────┬─────────┬────────────────╮
+│   Name  │  Kind/Image  │  State  │ IPv4/6 Address │
+├─────────┼──────────────┼─────────┼────────────────┤
+│ ceos-01 │ arista_ceos  │ running │ 172.24.78.10   │
+│         │ ceos:4.32.0F │         │ N/A            │
+├─────────┼──────────────┼─────────┼────────────────┤
+│ ceos-02 │ arista_ceos  │ running │ 172.24.78.11   │
+│         │ ceos:4.32.0F │         │ N/A            │
+├─────────┼──────────────┼─────────┼────────────────┤
+│ ceos-03 │ arista_ceos  │ running │ 172.24.78.12   │
+│         │ ceos:4.32.0F │         │ N/A            │
+├─────────┼──────────────┼─────────┼────────────────┤
+│ ceos-04 │ arista_ceos  │ running │ 172.24.78.13   │
+│         │ ceos:4.32.0F │         │ N/A            │
+╰─────────┴──────────────┴─────────┴────────────────╯
 ```
 
 2. Now that the lab has been deployed in the Codespace environment, and we have the mgmt IPs of the equipment we must update the Nornir inventory host file with the assigned IPs.
@@ -89,24 +107,24 @@ Next, checkout the `Lab_4_Source_Code_Checks` branch.
 git switch Lab_4_Source_Code_Checks
 ```
 
-5. Now navigate to `cicd_workshop` --> `inventory` --> `hosts.yml`
+5. Now navigate to `cicd_workshop` --> `inventory` --> `hosts.yaml`
 
-Update the host definitions `hostname` field with the correct IP address from the containerlab deploy command output.
+Validate the host definitions `hostname` field with the correct IP address from the containerlab deploy command output.
 
-For example the updates would look like this.
+For example the file should look like this.
 ```yml
 ---
 ceos-01:
-  hostname: "172.17.0.6"
+  hostname: "172.24.78.10"
 ... omitted ...
 ceos-02:
-  hostname: "172.17.0.4"
+  hostname: "172.24.78.11"
 ... omitted ...
 ceos-03:
-  hostname: "172.17.0.5"
+  hostname: "172.24.78.12"
 ... omitted ...
 ceos-04:
-  hostname: "172.17.0.3"
+  hostname: "1172.24.78.13"
 ... omitted ...
 ```
 
@@ -174,7 +192,7 @@ These are the two assumptions before you should push your code up:
 default:
   image: "ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER"
   tags:
-    - "jeffkala-docker-runner-codespace"  # Update using CICD Runner Tag you used!
+    - "jeff-local-runner"  # Update using CICD Runner Tag you used!
 ```
 
 3. Commit and Push your code up!

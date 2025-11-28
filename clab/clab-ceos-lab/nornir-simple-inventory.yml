@@ -1,0 +1,21 @@
+---
+ceos-01:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.24.78.10
+ceos-02:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.24.78.11
+ceos-03:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.24.78.12
+ceos-04:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.24.78.13

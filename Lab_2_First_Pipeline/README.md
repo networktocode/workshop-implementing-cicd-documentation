@@ -290,7 +290,7 @@ deploy testing:
   tags: 
     - "ericchou-1"  # Update with your project runner tag!!
   script: 
-    - python show_version.py
+    - cd cicd_lab1 && python show_version.py
  ```
 
 We will need to commit the files and push to the remote repository: 
@@ -339,8 +339,8 @@ deploy testing:
     - "ericchou-1"  # Update with your project runner tag!!
 
   script: 
-    - pip3 install nornir_utils nornir_netmiko
-    - python3 show_version.py
+    - pip install nornir_utils nornir_netmiko
+    - cd cicd_lab1 && python show_version.py
 ```
 
 Let's commit and up it upstream: 

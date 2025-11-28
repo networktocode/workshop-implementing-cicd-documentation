@@ -1,0 +1,209 @@
+{
+  "name": "ceos-lab",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "",
+      "mgmt": {
+        "network": "network-lab",
+        "bridge": "bridge",
+        "ipv4-subnet": "172.24.78.0/24",
+        "ipv4-gw": "172.24.78.1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORbr0YfqcQmQsXjA4WK2g5Z3PY/xIjKDP6bYGSExbZs"],
+  "nodes": {
+    "ceos-01": {
+      "index": "0",
+      "shortname": "ceos-01",
+      "longname": "ceos-01",
+      "fqdn": "ceos-01.ceos-lab.io",
+      "group": "",
+      "labdir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-01",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.24.78.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:58:54:12",
+      "labels": {
+        "clab-mgmt-net-bridge": "bridge",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-01",
+        "clab-node-longname": "ceos-01",
+        "clab-node-name": "ceos-01",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/workspaces/workshop-implementing-cicd-documentation/clab/ceos-lab.clab.yml",
+        "containerlab": "ceos-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "ceos-02": {
+      "index": "1",
+      "shortname": "ceos-02",
+      "longname": "ceos-02",
+      "fqdn": "ceos-02.ceos-lab.io",
+      "group": "",
+      "labdir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-02",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.24.78.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:b7:e7:be",
+      "labels": {
+        "clab-mgmt-net-bridge": "bridge",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-02",
+        "clab-node-longname": "ceos-02",
+        "clab-node-name": "ceos-02",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/workspaces/workshop-implementing-cicd-documentation/clab/ceos-lab.clab.yml",
+        "containerlab": "ceos-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "ceos-03": {
+      "index": "2",
+      "shortname": "ceos-03",
+      "longname": "ceos-03",
+      "fqdn": "ceos-03.ceos-lab.io",
+      "group": "",
+      "labdir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-03",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.24.78.12",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:e8:55:a5",
+      "labels": {
+        "clab-mgmt-net-bridge": "bridge",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-03",
+        "clab-node-longname": "ceos-03",
+        "clab-node-name": "ceos-03",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/workspaces/workshop-implementing-cicd-documentation/clab/ceos-lab.clab.yml",
+        "containerlab": "ceos-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "ceos-04": {
+      "index": "3",
+      "shortname": "ceos-04",
+      "longname": "ceos-04",
+      "fqdn": "ceos-04.ceos-lab.io",
+      "group": "",
+      "labdir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-04",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.24.78.13",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:cd:01:16",
+      "labels": {
+        "clab-mgmt-net-bridge": "bridge",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab/ceos-04",
+        "clab-node-longname": "ceos-04",
+        "clab-node-name": "ceos-04",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/workspaces/workshop-implementing-cicd-documentation/clab/ceos-lab.clab.yml",
+        "containerlab": "ceos-lab"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "ceos-01",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:bf:f9:2a",
+          "peer": "z"
+        },
+        "z": {
+          "node": "ceos-02",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:f3:62:05",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "ceos-01",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:da:eb:4d",
+          "peer": "z"
+        },
+        "z": {
+          "node": "ceos-04",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:cf:fb:98",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "ceos-02",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:7f:20:a0",
+          "peer": "z"
+        },
+        "z": {
+          "node": "ceos-03",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:11:b7:05",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "ceos-03",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:bc:c8:87",
+          "peer": "z"
+        },
+        "z": {
+          "node": "ceos-04",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:d6:09:b3",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}

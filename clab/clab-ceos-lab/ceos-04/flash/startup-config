@@ -1,0 +1,63 @@
+! Startup-config last modified at Thu Nov 27 21:28:17 2025 by root
+! device: ceos-04 (cEOSLab, EOS-4.32.0F-36401836.4320F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$FpDCzSQ/BO02nzXf$LUPVnJQENUqO3Foip5GFreIo2KOEE7iIgHY6.Lj2MrxaQcqhJpZv.sYAEp7D/Dlc.t2Ks42o0pax4GDwdhUuY/
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname ceos-04
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api http-commands
+   no shutdown
+!
+management http-server
+   protocol http
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+   description Connection to ceos-03
+   no switchport
+   ip address 10.10.10.10/30
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+!
+interface Ethernet2
+   description Connection to ceos-01
+   no switchport
+   ip address 10.10.10.13/30
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+!
+interface Loopback0
+   description Loopback for Router ID
+   ip address 10.0.0.4/32
+!
+interface Loopback100
+   description Mimic OSPF Area 0.0.0.4 loopback
+   ip address 192.168.104.100/24
+!
+interface Management0
+   ip address 172.24.78.13/24
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.0.4
+   max-lsa 12000
+!
+end

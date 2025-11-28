@@ -30,6 +30,10 @@ Let's go ahead and create a few labels for priorities and types:
 
 ![labels_2](images/labels_2.png)
 
+You can then see a list of all the labels you created.
+
+![labels_3](images/labels_3.png)
+
 ## Issues
 
 Issues can be used to collaborate on ideas, solve problems, or future planning:
