@@ -316,3 +316,7 @@ public
 /compose.yaml
 /dump.sql
 /nautobot_golden_config/static/nautobot_golden_config/docs
+
+cicd-workshop-lab1/*
+workshop-implementing-cicd-pipelines/*
+cEOS64-lab-*.tar
