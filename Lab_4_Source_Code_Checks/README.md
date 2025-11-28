@@ -40,6 +40,7 @@ origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (fetch)
 origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (push)
 ```
 
+## Enable SSH Key for Project
 
 Finally, lets allow our same `SSH Key` we generated previously in `Lab 1. Basic Git Operations`. In GitLab you do the follow:
 
@@ -55,6 +56,14 @@ Finally, lets allow our same `SSH Key` we generated previously in `Lab 1. Basic 
 4. Finally, we edit the key and make sure we check the box for ```Grant write permission to this key```
 
 ![deploy_keys_3](./images/deploy_keys_3.png)
+
+## Enable our GitLab Runner for the Project
+
+1. Go to the `workshop-implementing-cicd-pipelines` repository and navigate to Settings -> CI/CD -> Runners.
+
+2. Click on `Other Project Available Runners` and click enabled for this project button.
+
+![enable_runner](./images/enabled_runner1.png)
 
 
 ## Run Containerlab Topology and Update the Nornir Inventory
