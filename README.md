@@ -53,6 +53,22 @@ You just need to download the image for now, for reference here is the import in
 
 Alright, now it is time to tie everything together. 
 
+**Prerequisite**: Go into GitHub and modify the Codespaces timeout for your profile. We've had some issues when Codespaces times out, the Docker in Docker (DiD) doesn't restart properly.
+
+- Navigate to your profile -> settings.
+
+![github_settings1](images/github_settings1.png)
+
+- Select `Codespaces`
+
+![github_settings2](images/github_settings2.png)
+
+- Scroll down and find `Default Idle Timeout` and change it to 240.
+
+![github_settings3](images/github_settings3.png)
+
+### Starting the Lab
+
 1. In this repository, we can start Codespace by going to Code button on the top left corner and choose 'Create codespace on main': 
 
 ![codespace_start](images/codespace_start.png)
