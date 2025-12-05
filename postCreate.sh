@@ -1,6 +1,6 @@
 #!/bin/bash
 # install poetry
-curl -sSL https://install.python-poetry.org | python3 -
+curl -sSL https://install.python-poetry.org | python -
 # install containerlab
 curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
 # install tools
