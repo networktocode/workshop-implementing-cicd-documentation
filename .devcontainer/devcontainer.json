@@ -1,9 +1,6 @@
 {
     "name": "Implementing CICD Workshop",
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu24.04", 
-    "hostRequirements": {
-        "cpus": 16
-    },
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
