@@ -51,10 +51,10 @@ $ git config --global user.name "Eric Chou"
 $ git config --global user.email "echou@yahoo.com"
 ``` 
 
-The following steps will generate a ssh key pair for our user, we will copy the public key: 
+The following steps will generate a ssh key pair for our user, we will copy the public key `ssh-keygen -t rsa`: 
 
 ```
-$ ssh-keygen 
+$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/vscode/.ssh/id_rsa): 
 Created directory '/home/vscode/.ssh'.
