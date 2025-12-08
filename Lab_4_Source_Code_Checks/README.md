@@ -84,6 +84,11 @@ Navigate to clab directory:
 @jeffkala ➜ /workspaces/workshop-implementing-cicd  (main) $ cd ../clab/
 ```
 
+Delete the existing clab deployment
+```
+clab destroy -t ~/workshop-implementing-cicd-documentation/clab/clab-ceos-lab
+```
+
 Start the topology:
 ```
 @jeffkala ➜ /workspaces/workshop-implementing-cicd /clab (main) $ sudo containerlab deploy --topo ceos-lab.clab.yml 
