@@ -34,7 +34,11 @@ Here are the details regarding each components:
 
 Please do the following steps to set up the lab: 
 
-1. Register for a free GitLab.com account [here](https://gitlab.com/users/sign_up) if you do not have one. For a new registration, a project name is required, you can use a temp name or 'CICD Workshop Lab1' as that is one of the project we will create later: 
+1. Register for a free GitLab.com account [here](https://gitlab.com/users/sign_up) if you do not have one.
+    * For a new registration, a project name is required
+    * You can use a temp name or 'CICD Workshop Lab1' as that is one of the project we will create later (seen screen shot below):
+    * You can select private or public for Visibility level
+    * You can also initialize the project with a README
 
 ![gitlab_account_signup](images/gitlab_account_signup.png)
 
