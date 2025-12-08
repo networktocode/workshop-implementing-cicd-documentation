@@ -23,23 +23,30 @@ Here are the details regarding each components:
 
 - [GitLab](https://about.gitlab.com/pricing/): We will use the SaaS version of GitLab as the CI server. The CI server handles the committing, building, testing, staging, and releasing the changes. 
 - [GitLab Runners](https://docs.gitlab.com/runner/): GitLab runners are workers that registers itself with the GitLab server and managed by the GitLab server. They are responsible to carry out the instructions by the GitLab server. 
-- [GitHub Codespace](https://github.com/features/codespaces): We will use GitHub codespace as our IDE as well as the virtual server to run our network lab. GitHub provides these container-based development environment for developers. We will use Containerlab to run a few network devices for our lab. GitHub offer a generous free tier in Codespace that should remain to be free for the duration of this lab. 
 - [Containerlab](https://containerlab.dev/): We will use containerlab for our lab devices running inside of codespace.  
 - [Arista cEOS](https://containerlab.dev/manual/kinds/ceos/): We will use Arista cEOS for our lab for their light overhead and relative high adaption in production networks. 
+
+**One of the following are used for workshops**:
+- [Digital Ocean Droplets](https://www.digitalocean.com/): We will use a server from Digital Ocean as the as the virtual server to run our network lab. It has all services and software pre-installed to streamline the lab environment. We will use Containerlab to run a few network devices for our lab that will run inside the Droplet server. 
+- [GitHub Codespace](https://github.com/features/codespaces): We will use GitHub codespace as our IDE as well as the virtual server to run our network lab. GitHub provides these container-based development environment for developers. We will use Containerlab to run a few network devices for our lab. GitHub offer a generous free tier in Codespace that should remain to be free for the duration of this lab. 
 
 ## GitLab Account Registration and cEOS Download
 
 Please do the following steps to set up the lab: 
 
-1. Register for a free GitLab.com account [here](https://gitlab.com/users/sign_up) if you do not have one. For a new registration, a project name is required, you can use a temp name or 'CICD Workshop Lab1' as that is one of the project we will create later: 
+1. Register for a free GitLab.com account [here](https://gitlab.com/users/sign_up) if you do not have one.
+    * For a new registration, a project name is required
+    * You can use a temp name or 'CICD Workshop Lab1' as that is one of the project we will create later (seen screen shot below):
+    * You can select private or public for Visibility level
+    * You can also initialize the project with a README
 
 ![gitlab_account_signup](images/gitlab_account_signup.png)
 
-2. Download the free Arista cEOS image [here](https://www.arista.com/en/login). The image is free but you do need to register an Arista account with your business email. We will import the Arista image Codespace later. 
+2. You must regsiter Download the free Arista cEOS image before the end of the workshop. *The image is already installed in the server provided*, but you must still register for an account with Arista [here](https://www.arista.com/en/login). The image is free but you do need to register an Arista account with your business email. We will import and use the Arista image  later. 
 
 ![arista_download_1](images/arista_download_1.png)
 
-Please download images later than 4.28. We will use 4.32.0F for our lab. 
+Please download images later than 4.28. We will use 4.32.0F for our lab.  Again, it is already on the server. The important piece is that you should register for account on Arista.com before the end of the workshop.
 
 ![arista_downaload_2](images/arista_download_2.png)
 
@@ -47,36 +54,29 @@ Please download images later than 4.28. We will use 4.32.0F for our lab.
 > Download the 64 bit image.
 
 > [!TIP]
-You just need to download the image for now, for reference here is the import instruction from [containerlab](https://www.youtube.com/watch?v=KJMVH2okO24) and a nice walk through video from [Roman](https://www.youtube.com/watch?v=KJMVH2okO24). 
-
-### Lab Setup
-
-Alright, now it is time to tie everything together. 
-
-**Prerequisite**: Go into GitHub and modify the Codespaces timeout for your profile. We've had some issues when Codespaces times out, the Docker in Docker (DiD) doesn't restart properly.
-
-- Navigate to your profile -> settings.
-
-![github_settings1](images/github_settings1.png)
-
-- Select `Codespaces`
-
-![github_settings2](images/github_settings2.png)
-
-- Scroll down and find `Default Idle Timeout` and change it to 240.
-
-![github_settings3](images/github_settings3.png)
+You just need to register to download the image for now, for reference here is the import instruction from [containerlab](https://www.youtube.com/watch?v=KJMVH2okO24) and a nice walk through video from [Roman](https://www.youtube.com/watch?v=KJMVH2okO24). 
 
 ### Starting the Lab
 
-1. In this repository, we can start Codespace by going to Code button on the top left corner and choose 'Create codespace on main': 
+First, you will connect to the server with the IP address and password given to you by the instructors.
 
-![codespace_start](images/codespace_start.png)
+```
+ssh root@<ip-of-your-server>
+```
 
-> [!TIP] 
-> It will take a bit of time to build codespace for the first time, you can click on [building codespace](images/building_codespace.png) to check on the progress. After it started for the first time, when you stop/start the instance it will be much faster. 
+Once you connect, you will be in `/root`.  You will need to move into the `/root/workshop-implementing-cicd-documentation/` directory:
 
-Once Codespace is started, we can verify both Docker and containerlab are installed and running: 
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~# ls
+workshop-implementing-cicd-documentation
+```
+
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~# cd workshop-implementing-cicd-documentation/
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation# 
+```
+
+Now time to check versions of software ensuring everything is installed correctly:
 
 ```
 @ericchou1 ➜ /workspaces/workshop-implementing-cicd (main) $ poetry --version
@@ -104,18 +104,21 @@ This message shows that your installation appears to be working correctly.
  rel. notes: https://containerlab.dev/rn/0.58/
 ```
 
-2. After codespace is started, right click in the Explorer section and choose upload: 
 
-![upload_ceos](images/upload_ceos.png)
-
-
-3. Use command ```docker import cEOS64.<version>.tar.xz ceos:<version>``` to import the image, for example: 
+2. Use command ```docker import cEOS64-lab-<version>.tar.xz ceos:<version>``` to import the image, for example: 
 
 ```sh
 docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F
 ```
 
-4. Run the GitLab Runner in a docker container.
+You'll see a response like this:
+
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation# docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F
+sha256:b99006d1deed4f33658e488b1a3bb17f24821be33aacfd6673d197c726b17c4f
+```
+
+3. Run the GitLab Runner in a docker container.
 
 ```sh
 docker run -d --name gitlab-runner --restart always \
@@ -124,12 +127,27 @@ docker run -d --name gitlab-runner --restart always \
 gitlab/gitlab-runner:latest
 ```
 
-5. Register GitLab Runner (screenshot following the steps): 
-    - Under the GitLab project you created, get runner token via Project -> Settings -> CICD -> Project Runners. 
-    - When creating this runner, we will use tags to specify the jobs this runner can pickup. 
-    - Copy the `token`.
-    - Come back to the Codespace instance.
-    - Register runner via the following command `docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register`
+This is what it'll look like on the terminal as you enter it:
+
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation# docker run -d --name gitlab-runner --restart always \
+-v /srv/gitlab-runner/config:/etc/gitlab-runner \
+-v /var/run/docker.sock:/var/run/docker.sock \
+gitlab/gitlab-runner:latest
+49b49638eda01fe7dac8c725f96aa3e491306af992a05d80bd2c65f40bbd7ce2
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation#
+```
+
+
+4. Register GitLab Runner (screenshot following the steps): 
+    - Under the GitLab project you created, get runner token via Project -> Settings -> CICD -> Runners. 
+    - Click "Create project runner."
+    - When creating this runner, we will use tags to specify the jobs this runner can pickup, so add a tag.
+    - Create the runner - after clicking create, you'll see the token you need
+    - Copy the `$token`.
+    - Come back to the server
+    - Register runner via the following command: `docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register`
+
     - Answer the questions:
       - Enter GitLab instance: `https://gitlab.com/`
       - Enter the registration token: `<token you copied previously>`

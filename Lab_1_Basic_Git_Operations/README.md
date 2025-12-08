@@ -24,7 +24,7 @@ To begin with, make sure you have GitHub Codespace launched and ready to go foll
 We should have already created a project in order to create a new runner. However, if you have not done so already, or created a project under a different name, we can create a new project from the ```+``` sign and pick 'New project/repository':
 
 > [!New UI]
->  While updating this workshop in late 2025 GitLab is doing a canary deployment for their `New UI`, feel free to toggle it off during the setup.
+>  While updating this workshop in late 2025 GitLab is doing a canary deployment for their `New UI`, feel free to toggle it off during the setup if needed.
 
 ![toggle_new_ui](images/toggle_new_ui.png)
 
@@ -51,10 +51,10 @@ $ git config --global user.name "Eric Chou"
 $ git config --global user.email "echou@yahoo.com"
 ``` 
 
-The following steps will generate a ssh key pair for our user, we will copy the public key: 
+The following steps will generate a ssh key pair for our user, we will copy the public key `ssh-keygen -t rsa`: 
 
 ```
-$ ssh-keygen 
+$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/vscode/.ssh/id_rsa): 
 Created directory '/home/vscode/.ssh'.
