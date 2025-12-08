@@ -109,7 +109,7 @@ This message shows that your installation appears to be working correctly.
 ![upload_ceos](images/upload_ceos.png)
 
 
-3. Use command ```docker import cEOS64.<version>.tar.xz ceos:<version>``` to import the image, for example: 
+3. Use command ```docker import cEOS64-lab-<version>.tar.xz ceos:<version>``` to import the image, for example: 
 
 ```sh
 docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F
