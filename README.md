@@ -100,18 +100,14 @@ This message shows that your installation appears to be working correctly.
  rel. notes: https://containerlab.dev/rn/0.58/
 ```
 
-2. After codespace is started, right click in the Explorer section and choose upload: 
 
-![upload_ceos](images/upload_ceos.png)
-
-
-3. Use command ```docker import cEOS64-lab-<version>.tar.xz ceos:<version>``` to import the image, for example: 
+2. Use command ```docker import cEOS64-lab-<version>.tar.xz ceos:<version>``` to import the image, for example: 
 
 ```sh
 docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F
 ```
 
-4. Run the GitLab Runner in a docker container.
+3. Run the GitLab Runner in a docker container.
 
 ```sh
 docker run -d --name gitlab-runner --restart always \
@@ -120,7 +116,7 @@ docker run -d --name gitlab-runner --restart always \
 gitlab/gitlab-runner:latest
 ```
 
-5. Register GitLab Runner (screenshot following the steps): 
+4. Register GitLab Runner (screenshot following the steps): 
     - Under the GitLab project you created, get runner token via Project -> Settings -> CICD -> Project Runners. 
     - When creating this runner, we will use tags to specify the jobs this runner can pickup. 
     - Copy the `token`.
