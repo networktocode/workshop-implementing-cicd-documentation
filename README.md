@@ -107,6 +107,13 @@ This message shows that your installation appears to be working correctly.
 docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F
 ```
 
+You'll see a response like this:
+
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation# docker import cEOS64-lab-4.32.0F.tar ceos:4.32.0F
+sha256:b99006d1deed4f33658e488b1a3bb17f24821be33aacfd6673d197c726b17c4f
+```
+
 3. Run the GitLab Runner in a docker container.
 
 ```sh
@@ -115,6 +122,18 @@ docker run -d --name gitlab-runner --restart always \
 -v /var/run/docker.sock:/var/run/docker.sock \
 gitlab/gitlab-runner:latest
 ```
+
+This is what it'll look like on the terminal as you enter it:
+
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation# docker run -d --name gitlab-runner --restart always \
+-v /srv/gitlab-runner/config:/etc/gitlab-runner \
+-v /var/run/docker.sock:/var/run/docker.sock \
+gitlab/gitlab-runner:latest
+49b49638eda01fe7dac8c725f96aa3e491306af992a05d80bd2c65f40bbd7ce2
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation#
+```
+
 
 4. Register GitLab Runner (screenshot following the steps): 
     - Under the GitLab project you created, get runner token via Project -> Settings -> CICD -> Project Runners. 
