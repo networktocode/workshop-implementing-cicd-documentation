@@ -140,11 +140,14 @@ root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-do
 
 
 4. Register GitLab Runner (screenshot following the steps): 
-    - Under the GitLab project you created, get runner token via Project -> Settings -> CICD -> Project Runners. 
-    - When creating this runner, we will use tags to specify the jobs this runner can pickup. 
-    - Copy the `token`.
-    - Come back to the Codespace instance.
-    - Register runner via the following command `docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register`
+    - Under the GitLab project you created, get runner token via Project -> Settings -> CICD -> Runners. 
+    - Click "Create project runner."
+    - When creating this runner, we will use tags to specify the jobs this runner can pickup, so add a tag.
+    - Create the runner - after clicking create, you'll see the token you need
+    - Copy the `$token`.
+    - Come back to the server
+    - Register runner via the following command: `docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register`
+
     - Answer the questions:
       - Enter GitLab instance: `https://gitlab.com/`
       - Enter the registration token: `<token you copied previously>`
