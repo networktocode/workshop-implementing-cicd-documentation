@@ -6,7 +6,7 @@ In this lab, we will start to build our CICD pipeline on GitLab. If you have not
 
 In this lab, we will use the same [GitLab Project](../Lab_1_Basic_Git_Operations/README.md) we set up in "Lab 1 Basic Git Operations"; however, please feel free to create another project if you'd like. 
 
-Let's create a new file named ```.gitlab-ci.yml``` at the root level of the project. The name and the location **are** important. 
+Let's create a new file named ```.gitlab-ci.yml``` at the root level of the project. The name and the location of the file **are** important. 
 
 ![create_new_file](images/create_new_file.png)
 
@@ -51,7 +51,7 @@ We will add a tag to the stage to allow us to pin the job to the particular runn
 
 ![edit_runnder](images/edit_runner.png)
 
-Add the tag to what you have set it out when the runner was registered, for me, it was ```jeff-local-runner```: 
+Add the tag to what you have set it out when the runner was registered [README.md](/README.md#starting-the-lab), for me, it was ```ericchou-1```: 
 
 ```
 stages: 
@@ -61,7 +61,7 @@ deploy testing:
   image: "ubuntu:22.04"
   stage: deploy
   tags: 
-    - "jeff-local-runner"
+    - "ericchou-1"
   script: 
     - echo "hello world"
 ```

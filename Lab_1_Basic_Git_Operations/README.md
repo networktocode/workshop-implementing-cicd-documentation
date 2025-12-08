@@ -24,7 +24,7 @@ To begin with, make sure you have GitHub Codespace launched and ready to go foll
 We should have already created a project in order to create a new runner. However, if you have not done so already, or created a project under a different name, we can create a new project from the ```+``` sign and pick 'New project/repository':
 
 > [!New UI]
->  While updating this workshop in late 2025 GitLab is doing a canary deployment for their `New UI`, feel free to toggle it off during the setup.
+>  While updating this workshop in late 2025 GitLab is doing a canary deployment for their `New UI`, feel free to toggle it off during the setup if needed.
 
 ![toggle_new_ui](images/toggle_new_ui.png)
 
