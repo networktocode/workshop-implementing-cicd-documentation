@@ -58,10 +58,10 @@ stages:
   - deploy
 
 deploy testing:
-  image: "ubuntu:22.04"
+  image: "python:3.10"
   stage: deploy
   tags: 
-    - "ericchou-1"
+    - "ericchou-1"  # CHANGE ME
   script: 
     - echo "hello world"
 ```

@@ -22,6 +22,16 @@ cd workshop-implementing-cicd-pipelines/cicd_workshop/
 git switch Lab_6_Testing_Frameworks
 ```
 
+3. Update `.gitlab-ci.yaml` to change the tag to the tag you registered your runner with.
+
+```yml
+---
+default:
+  image: "ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER"
+  tags:
+    - "jeff-local-runner"  # Update using CICD Runner Tag you used!
+```
+
 ## Ensure Container Lab Topology is up
 
 In Lab 4 we started our Containerlab topology. Quickly make sure that is still up and the Mgmt IPs havent changed.
@@ -166,9 +176,15 @@ This test file has ping checks to validate reachability of our new Lo100 OSPF ro
 
 ## Execute the Full Pipeline
 
-Since lab 5 included a push of the code, we don't have any actual changes to push. This is a bit unique to this workshop and how we're building on top of each lab.
+With the updates to our GitLab CI file (for our tag) we have a commit to push up which will run the full pipeline.
 
-Due to that we're going to execute lab 6 pipeline manually. 
+You can push the commit up.
+
+```sh
+git add -A;git commit -m "update gitlab-runner tag";git push
+```
+
+If you didn't have any commits to push and/or your file already had the proper `tag` set you can manually run the pipeline by following the steps below.
 
 1. Go into your GitLab UI and navigate to the forked project.
 2. Navigate to Builds from the side menu and click on Pipelines.

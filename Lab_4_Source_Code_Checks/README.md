@@ -37,7 +37,6 @@ From within the `workshop-implementing-cicd-pipelines` directory validate your r
 ```sh
 @jeffkala ➜ /workspaces/workshop-implementing-cicd-documentation/workshop-implementing-cicd-pipelines (main) $ git remote -v
 origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (fetch)
-origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (push)
 ```
 
 ## Enable SSH Key for Project
@@ -56,6 +55,14 @@ Finally, lets allow our same `SSH Key` we generated previously in `Lab 1. Basic 
 4. Finally, we edit the key and make sure we check the box for ```Grant write permission to this key```
 
 ![deploy_keys_3](./images/deploy_keys_3.png)
+
+5. Lastly, with the deploy keys set you'll see a `push` remote has been setup.
+
+```sh
+@jeffkala ➜ /workspaces/workshop-implementing-cicd-documentation/workshop-implementing-cicd-pipelines (main) $ git remote -v
+origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (fetch)
+origin  git@gitlab.com:jeffkala/workshop-implementing-cicd-pipelines.git (push)
+```
 
 ## Enable our GitLab Runner for the Project
 
@@ -133,7 +140,7 @@ ceos-03:
   hostname: "172.24.78.12"
 ... omitted ...
 ceos-04:
-  hostname: "1172.24.78.13"
+  hostname: "172.24.78.13"
 ... omitted ...
 ```
 
@@ -194,7 +201,7 @@ Now that we understand lab 4, and the source code checks, lets update and run th
 These are the two assumptions before you should push your code up:
 
 1. Ensure you've updated your Nornir inventory files from [here](README.md#run-containerlab-topology-and-update-the-nornir-inventory).
-2. Navigate to the main `.gitlab-ci.yml` pipeline file and update your tag to what you deployed in the first lab.
+2. Navigate to the main `.gitlab-ci.yml` pipeline file and update your tag to what you deployed in the first lab. Make sure to update the tag with the one you created!
 
 ```yml
 ---
