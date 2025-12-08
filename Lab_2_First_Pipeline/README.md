@@ -115,6 +115,8 @@ You are on the latest version (0.71.1)
 
 > [!NOTE] To save some resources, I am only building the lab with 2 nodes, your output might look different with additional nodes. 
 
+Username/Password: admin/admin
+
 We can do some reachability testing to make sure the nodes are up and running: 
 
 ```
