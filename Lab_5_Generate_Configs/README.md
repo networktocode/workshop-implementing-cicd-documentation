@@ -18,6 +18,8 @@ cd workshop-implementing-cicd-pipelines/cicd_workshop/
 git switch Lab_5_Generate_Configs
 ```
 
+3. Navigate to the main `.gitlab-ci.yml` pipeline file and update your tag to what you deployed in the first lab. Make sure to update the tag with the one you created!
+
 ## Ensure Container Lab Topology is up
 
 In Lab 4 we started our Containerlab topology. Quickly make sure that is still up and the Mgmt IPs haven't changed.
@@ -74,6 +76,7 @@ include:
   - local: ".gitlab/ci/lab-4-includes.gitlab-ci.yml"
   - local: ".gitlab/ci/lab-5-includes.gitlab-ci.yml"
 ```
+
 5. Lab 5 includes file has two jobs.
 
 ```yml

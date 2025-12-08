@@ -206,6 +206,7 @@ Now that we understand lab 4, and the source code checks, lets update and run th
 These are the two assumptions before you should push your code up:
 
 1. Ensure you've updated your Nornir inventory files from [here](README.md#run-containerlab-topology-and-update-the-nornir-inventory).
+
 2. Navigate to the main `.gitlab-ci.yml` pipeline file and update your tag to what you deployed in the first lab. Make sure to update the tag with the one you created!
 
 ```yml
