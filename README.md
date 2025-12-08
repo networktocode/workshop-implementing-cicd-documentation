@@ -23,9 +23,12 @@ Here are the details regarding each components:
 
 - [GitLab](https://about.gitlab.com/pricing/): We will use the SaaS version of GitLab as the CI server. The CI server handles the committing, building, testing, staging, and releasing the changes. 
 - [GitLab Runners](https://docs.gitlab.com/runner/): GitLab runners are workers that registers itself with the GitLab server and managed by the GitLab server. They are responsible to carry out the instructions by the GitLab server. 
-- [GitHub Codespace](https://github.com/features/codespaces): We will use GitHub codespace as our IDE as well as the virtual server to run our network lab. GitHub provides these container-based development environment for developers. We will use Containerlab to run a few network devices for our lab. GitHub offer a generous free tier in Codespace that should remain to be free for the duration of this lab. 
 - [Containerlab](https://containerlab.dev/): We will use containerlab for our lab devices running inside of codespace.  
 - [Arista cEOS](https://containerlab.dev/manual/kinds/ceos/): We will use Arista cEOS for our lab for their light overhead and relative high adaption in production networks. 
+
+**One of the following are used for workshops**:
+- [Digital Ocean Droplets](https://www.digitalocean.com/): We will use a server from Digital Ocean as the as the virtual server to run our network lab. It has all services and software pre-installed to streamline the lab environment. We will use Containerlab to run a few network devices for our lab that will run inside the Droplet server. 
+- [GitHub Codespace](https://github.com/features/codespaces): We will use GitHub codespace as our IDE as well as the virtual server to run our network lab. GitHub provides these container-based development environment for developers. We will use Containerlab to run a few network devices for our lab. GitHub offer a generous free tier in Codespace that should remain to be free for the duration of this lab. 
 
 ## GitLab Account Registration and cEOS Download
 
@@ -35,11 +38,11 @@ Please do the following steps to set up the lab:
 
 ![gitlab_account_signup](images/gitlab_account_signup.png)
 
-2. Download the free Arista cEOS image [here](https://www.arista.com/en/login). The image is free but you do need to register an Arista account with your business email. We will import the Arista image Codespace later. 
+2. You must regsiter Download the free Arista cEOS image before the end of the workshop. *The image is already installed in the server provided*, but you must still register for an account with Arista [here](https://www.arista.com/en/login). The image is free but you do need to register an Arista account with your business email. We will import and use the Arista image  later. 
 
 ![arista_download_1](images/arista_download_1.png)
 
-Please download images later than 4.28. We will use 4.32.0F for our lab. 
+Please download images later than 4.28. We will use 4.32.0F for our lab.  Again, it is already on the server. The important piece is that you should register for account on Arista.com before the end of the workshop.
 
 ![arista_downaload_2](images/arista_download_2.png)
 
@@ -47,36 +50,29 @@ Please download images later than 4.28. We will use 4.32.0F for our lab.
 > Download the 64 bit image.
 
 > [!TIP]
-You just need to download the image for now, for reference here is the import instruction from [containerlab](https://www.youtube.com/watch?v=KJMVH2okO24) and a nice walk through video from [Roman](https://www.youtube.com/watch?v=KJMVH2okO24). 
-
-### Lab Setup
-
-Alright, now it is time to tie everything together. 
-
-**Prerequisite**: Go into GitHub and modify the Codespaces timeout for your profile. We've had some issues when Codespaces times out, the Docker in Docker (DiD) doesn't restart properly.
-
-- Navigate to your profile -> settings.
-
-![github_settings1](images/github_settings1.png)
-
-- Select `Codespaces`
-
-![github_settings2](images/github_settings2.png)
-
-- Scroll down and find `Default Idle Timeout` and change it to 240.
-
-![github_settings3](images/github_settings3.png)
+You just need to register to download the image for now, for reference here is the import instruction from [containerlab](https://www.youtube.com/watch?v=KJMVH2okO24) and a nice walk through video from [Roman](https://www.youtube.com/watch?v=KJMVH2okO24). 
 
 ### Starting the Lab
 
-1. In this repository, we can start Codespace by going to Code button on the top left corner and choose 'Create codespace on main': 
+First, you will connect to the server with the IP address and password given to you by the instructors.
 
-![codespace_start](images/codespace_start.png)
+```
+ssh root@<ip-of-your-server>
+```
 
-> [!TIP] 
-> It will take a bit of time to build codespace for the first time, you can click on [building codespace](images/building_codespace.png) to check on the progress. After it started for the first time, when you stop/start the instance it will be much faster. 
+Once you connect, you will be in `/root`.  You will need to move into the `/root/workshop-implementing-cicd-documentation/` directory:
 
-Once Codespace is started, we can verify both Docker and containerlab are installed and running: 
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~# ls
+workshop-implementing-cicd-documentation
+```
+
+```
+root@ubuntu-cicd-workshop-techex25-instructor-01:~# cd workshop-implementing-cicd-documentation/
+root@ubuntu-cicd-workshop-techex25-instructor-01:~/workshop-implementing-cicd-documentation# 
+```
+
+Now time to check versions of software ensuring everything is installed correctly:
 
 ```
 @ericchou1 ➜ /workspaces/workshop-implementing-cicd (main) $ poetry --version
