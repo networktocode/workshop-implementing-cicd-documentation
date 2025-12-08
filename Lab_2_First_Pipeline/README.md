@@ -78,7 +78,7 @@ We have pre-installed containerlab executable and the topology file during the C
 
 ```
 $ pwd
-/workspaces/workshop-implementing-cicd
+~/workshop-implementing-cicd-documentation
 
 $ cd clab/
 $ ls -lia
@@ -88,12 +88,12 @@ total 16
 1835106 -rw-rw-rw-   1 vscode root  877 Nov  5 16:28 ceos-lab.clab.yml
 1835107 drwxrwxrwx+  2 vscode root 4096 Nov  5 16:28 startup-configs
 
-@jeffkala ➜ /workspaces/workshop-implementing-cicd-documentation/clab (main) $ sudo containerlab deploy --node-filter ceos-01,ceos-02 --topo ceos-lab.clab.yml 
+@jeffkala ➜ ~/workshop-implementing-cicd-documentation/clab (main) $ sudo containerlab deploy --node-filter ceos-01,ceos-02 --topo ceos-lab.clab.yml 
 03:41:42 INFO Containerlab started version=0.71.1
 03:41:42 INFO Applying node filter: ["ceos-01" "ceos-02"]
 03:41:42 INFO Parsing & checking topology file=ceos-lab.clab.yml
 03:41:42 INFO Creating docker network name=network-lab IPv4 subnet=172.24.78.0/24 IPv6 subnet="" MTU=0
-03:41:42 INFO Creating lab directory path=/workspaces/workshop-implementing-cicd-documentation/clab/clab-ceos-lab
+03:41:42 INFO Creating lab directory path=~/workshop-implementing-cicd-documentation/clab/clab-ceos-lab
 03:41:42 INFO Creating container name=ceos-02
 03:41:42 INFO Creating container name=ceos-01
 03:41:42 INFO Running postdeploy actions for Arista cEOS 'ceos-01' node
