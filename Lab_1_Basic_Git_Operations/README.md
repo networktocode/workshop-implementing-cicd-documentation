@@ -274,6 +274,8 @@ $ git branch
 * dev
   main
 
+$ git fetch
+
 $ git checkout main
 Switched to branch 'main'
 Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.
